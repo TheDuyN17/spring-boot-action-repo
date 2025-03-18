@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: theduy2510/myapp:latest  # Image trên Docker Hub
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"  # Cấu hình Spring Boot nếu cần
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,6 +1,5 @@
 name: Java CI with Maven
 
-# Trigger workflow when push to the 'main' branch
 on:
   push:
     branches:
@@ -14,24 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Bước 1: Checkout mã nguồn từ GitHub repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Bước 2: Cài đặt JDK 17 (hoặc phiên bản phù hợp với dự án của bạn)
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
 
-      # Bước 3: Cài đặt Maven (nếu chưa có)
       - name: Set up Maven
-        uses: actions/setup-maven@v3
+        uses: actions/setup-maven@v2  # Đảm bảo sử dụng phiên bản v2
 
-      # Bước 4: Cài đặt các dependencies và build dự án
       - name: Build with Maven
-        run: mvn clean install -DskipTests  # Dùng -DskipTests nếu bạn không muốn chạy test trong GitHub Actions
+        run: mvn clean install -DskipTests
 
-      # Bước 5: Chạy các bài test
       - name: Run tests with Maven
         run: mvn test

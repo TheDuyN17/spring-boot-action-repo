@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Thay đổi để chạy trên Windows
 
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-maven@v2  # Đảm bảo sử dụng phiên bản v2
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean install -DskipTests  # Xây dựng dự án với Maven
 
       - name: Run tests with Maven
-        run: mvn test
+        run: mvn test  # Chạy các bài test với Maven
